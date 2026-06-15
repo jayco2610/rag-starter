@@ -1,3 +1,4 @@
 google-genai
 langchain-ollama
 python-dotenv
+gradio
