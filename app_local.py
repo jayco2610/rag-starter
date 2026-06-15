@@ -1,7 +1,7 @@
 from langchain_ollama import OllamaLLM
 
 MODEL = "llama3.1:8b"
-DOC_PATH = "sample_doc.txt"
+DOC_PATH = "mia_clinic.txt"
 
 def load_document(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
@@ -9,14 +9,15 @@ def load_document(path: str) -> str:
 
 def ask(question: str, document: str) -> str:
     llm = OllamaLLM(model=MODEL)
-    prompt = f"""Ты помощник клиники. Отвечай только на основе документа ниже.
-Если ответа нет в документе — скажи об этом честно.
+    prompt = f"""Ты вежливый помощник стоматологической клиники МИА.РФ.
+Отвечай только на основе документа ниже. Будь конкретным — называй цены и условия.
+Если ответа нет в документе — скажи об этом честно и предложи позвонить или зайти на сайт miaclinic.ru.
 
 Документ:
 {document}
 
-Вопрос: {question}
-Ответ:"""
+Вопрос пациента: {question}
+Ответ помощника:"""
     return llm.invoke(prompt)
 
 def main():
